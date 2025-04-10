@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Questionário Coreográfico</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #141414;
+      color: #fff;
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #fff;
+    }
+
+    .question {
+      background: #1e1e1e;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.05);
+    }
+
+    .question h3 {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+      accent-color: #00ffc8;
+    }
+
+    button {
+      background: #00ffc8;
+      color: #000;
+      font-weight: bold;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: block;
+      margin: 30px auto;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #00cfa3;
+    }
+
+    #result {
+      background: #252525;
+      border-left: 4px solid #00ffc8;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 30px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💭 Questionário: Não-Afirmativas na Coreografia</h1>
+
+  <form id="formCoreografia">
+
+    <div class="question">
+      <h3>1. O que você entende como um movimento não-afirmativo?</h3>
+      <label><input type="checkbox" name="q1" value="Movimento sem intenção clara">Movimento sem intenção clara</label>
+      <label><input type="checkbox" name="q1" value="Gesto ambíguo ou inconcluso">Gesto ambíguo ou inconcluso</label>
+      <label><input type="checkbox" name="q1" value="Movimento repetido sem razão lógica">Movimento repetido sem razão lógica</label>
+      <label><input type="checkbox" name="q1" value="Movimento sincronizado e expressivo">Movimento sincronizado e expressivo</label>
+    </div>
+
+    <div class="question">
+      <h3>2. Por que usar não-afirmativas em uma coreografia?</h3>
+      <label><input type="checkbox" name="q2" value="Criar tensão ou ambiguidade">Criar tensão ou ambiguidade</label>
+      <label><input type="checkbox" name="q2" value="Questionar padrões">Questionar padrões</label>
+      <label><input type="checkbox" name="q2" value="Permitir múltiplas interpretações">Permitir múltiplas interpretações</label>
+      <label><input type="checkbox" name="q2" value="Garantir clareza da mensagem">Garantir clareza da mensagem</label>
+    </div>
+
+    <div class="question">
+      <h3>3. Quais recursos você usaria para criar esse tipo de linguagem?</h3>
+      <label><input type="checkbox" name="q3" value="Silêncio corporal">Silêncio corporal</label>
+      <label><input type="checkbox" name="q3" value="Fragmentação dos gestos">Fragmentação dos gestos</label>
+      <label><input type="checkbox" name="q3" value="Falta de ritmo ou quebra de fluidez">Falta de ritmo ou quebra de fluidez</label>
+      <label><input type="checkbox" name="q3" value="Expressão intensa e direcionada">Expressão intensa e direcionada</label>
+    </div>
+
+    <button type="button" onclick="mostrarResultado()">Enviar Respostas</button>
+
+    <div id="result"></div>
+
+  </form>
+
+  <script>
+    function mostrarResultado() {
+      const form = document.getElementById("formCoreografia");
+      const formData = new FormData(form);
+      const respostas = {};
+
+      for (const [chave, valor] of formData.entries()) {
+        if (!respostas[chave]) {
+          respostas[chave] = [];
+        }
+        respostas[chave].push(valor);
+      }
+
+      let output = "<h3>🧠 Suas respostas:</h3><ul>";
+      for (let pergunta in respostas) {
+        output += `<li><strong>${pergunta}:</strong> ${respostas[pergunta].join(", ")}</li>`;
+      }
+      output += "</ul>";
+
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = output;
+      resultDiv.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
