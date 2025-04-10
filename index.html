@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Questionário do Dançarino</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .question {
+      background: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin: 5px 0;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 25px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #resultado {
+      background: #e1ffe1;
+      border: 1px solid #a3d7a3;
+      padding: 15px;
+      border-radius: 8px;
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Questionário: Objetivos na Dança</h1>
+
+  <form id="formulario">
+    <div class="question">
+      <p>1. O que te motiva a dançar?</p>
+      <label><input type="checkbox" name="motivo" value="Expressar emoções" /> Expressar emoções</label>
+      <label><input type="checkbox" name="motivo" value="Trabalhar com dança" /> Trabalhar com dança</label>
+      <label><input type="checkbox" name="motivo" value="Melhorar autoestima" /> Melhorar autoestima</label>
+      <label><input type="checkbox" name="motivo" value="Divertir-se" /> Divertir-se</label>
+    </div>
+
+    <div class="question">
+      <p>2. Quais são seus principais desafios?</p>
+      <label><input type="checkbox" name="desafios" value="Falta de tempo" /> Falta de tempo</label>
+      <label><input type="checkbox" name="desafios" value="Cuidar das crianças" /> Cuidar das crianças</label>
+      <label><input type="checkbox" name="desafios" value="Falta de espaço para treinar" /> Falta de espaço para treinar</label>
+      <label><input type="checkbox" name="desafios" value="Vergonha de se apresentar" /> Vergonha de se apresentar</label>
+    </div>
+
+    <div class="question">
+      <p>3. O que você gostaria de alcançar com a dança?</p>
+      <label><input type="checkbox" name="objetivos" value="Fazer parte de um grupo" /> Fazer parte de um grupo</label>
+      <label><input type="checkbox" name="objetivos" value="Apresentar-se em público" /> Apresentar-se em público</label>
+      <label><input type="checkbox" name="objetivos" value="Criar coreografias próprias" /> Criar coreografias próprias</label>
+      <label><input type="checkbox" name="objetivos" value="Inspirar outras pessoas" /> Inspirar outras pessoas</label>
+    </div>
+
+    <button type="button" onclick="mostrarRespostas()">Ver Respostas</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    function mostrarRespostas() {
+      const resultadoDiv = document.getElementById("resultado");
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      let respostas = [];
+
+      checkboxes.forEach(checkbox => {
+        respostas.push(checkbox.value);
+      });
+
+      if (respostas.length === 0) {
+        resultadoDiv.innerHTML = "<strong>Nenhuma resposta selecionada.</strong>";
+      } else {
+        resultadoDiv.innerHTML = "<strong>Suas respostas:</strong><ul><li>" + respostas.join("</li><li>") + "</li></ul>";
+      }
+
+      resultadoDiv.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
