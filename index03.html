@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Questionário: Alongamento e Aquecimento</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ffcc;
+      margin-bottom: 40px;
+    }
+
+    .question {
+      background-color: #1f1f1f;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,255,204,0.1);
+    }
+
+    .question h3 {
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+      accent-color: #00ffcc;
+    }
+
+    button {
+      display: block;
+      margin: 30px auto;
+      background-color: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 12px 28px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00caa6;
+    }
+
+    #result {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #1a1a1a;
+      border-left: 5px solid #00ffcc;
+      border-radius: 10px;
+    }
+
+    #result ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    #result li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔥 Questionário: Alongamento & Aquecimento</h1>
+
+  <form id="formAquecimento">
+
+    <div class="question">
+      <h3>1. Por que é importante aquecer antes de dançar?</h3>
+      <label><input type="checkbox" name="q1" value="Aumentar a temperatura do corpo">Aumentar a temperatura do corpo</label>
+      <label><input type="checkbox" name="q1" value="Evitar lesões">Evitar lesões</label>
+      <label><input type="checkbox" name="q1" value="Melhorar o foco mental">Melhorar o foco mental</label>
+      <label><input type="checkbox" name="q1" value="Aumentar a flexibilidade imediatamente">Aumentar a flexibilidade imediatamente</label>
+    </div>
+
+    <div class="question">
+      <h3>2. Qual tipo de aquecimento você costuma fazer?</h3>
+      <label><input type="checkbox" name="q2" value="Cardio leve">Cardio leve</label>
+      <label><input type="checkbox" name="q2" value="Isolamento articular">Isolamento articular</label>
+      <label><input type="checkbox" name="q2" value="Exercícios de força">Exercícios de força</label>
+      <label><input type="checkbox" name="q2" value="Nenhum">Nenhum 😬</label>
+    </div>
+
+    <div class="question">
+      <h3>3. Quando você costuma se alongar?</h3>
+      <label><input type="checkbox" name="q3" value="Antes de dançar">Antes de dançar</label>
+      <label><input type="checkbox" name="q3" value="Depois da aula">Depois da aula</label>
+      <label><input type="checkbox" name="q3" value="Durante pausas">Durante pausas</label>
+      <label><input type="checkbox" name="q3" value="Quase nunca">Quase nunca 😅</label>
+    </div>
+
+    <div class="question">
+      <h3>4. Que tipo de alongamento você prefere?</h3>
+      <label><input type="checkbox" name="q4" value="Estático (parado)">Estático (parado)</label>
+      <label><input type="checkbox" name="q4" value="Dinâmico (em movimento)">Dinâmico (em movimento)</label>
+      <label><input type="checkbox" name="q4" value="Com objetos ou parceiro">Com objetos ou parceiro</label>
+      <label><input type="checkbox" name="q4" value="Não sei a diferença">Não sei a diferença</label>
+    </div>
+
+    <div class="question">
+      <h3>5. Quais partes do corpo você sente mais necessidade de alongar?</h3>
+      <label><input type="checkbox" name="q5" value="Pernas">Pernas</label>
+      <label><input type="checkbox" name="q5" value="Costas e pescoço">Costas e pescoço</label>
+      <label><input type="checkbox" name="q5" value="Braços e ombros">Braços e ombros</label>
+      <label><input type="checkbox" name="q5" value="Quadril e tornozelos">Quadril e tornozelos</label>
+    </div>
+
+    <div class="question">
+      <h3>6. Você já sentiu dores causadas por falta de alongamento ou aquecimento?</h3>
+      <label><input type="checkbox" name="q6" value="Sim, frequentemente">Sim, frequentemente</label>
+      <label><input type="checkbox" name="q6" value="Às vezes">Às vezes</label>
+      <label><input type="checkbox" name="q6" value="Raramente">Raramente</label>
+      <label><input type="checkbox" name="q6" value="Nunca">Nunca</label>
+    </div>
+
+    <button type="button" onclick="mostrarRespostas()">Enviar Respostas</button>
+
+    <div id="result"></div>
+
+  </form>
+
+  <script>
+    function mostrarRespostas() {
+      const form = document.getElementById("formAquecimento");
+      const formData = new FormData(form);
+      const respostas = {};
+
+      for (const [chave, valor] of formData.entries()) {
+        if (!respostas[chave]) {
+          respostas[chave] = [];
+        }
+        respostas[chave].push(valor);
+      }
+
+      let output = "<h3>🧘 Suas respostas:</h3><ul>";
+      for (let pergunta in respostas) {
+        output += `<li><strong>${pergunta}:</strong> ${respostas[pergunta].join(", ")}</li>`;
+      }
+      output += "</ul>";
+
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = output;
+      resultDiv.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
